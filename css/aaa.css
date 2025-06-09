@@ -493,27 +493,21 @@ body {
   z-index: 0;
 }
 
-@keyframes glow {
-  from {
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
-  }
-  to {
-    text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff;
-  }
-}
-
-.profile-center{
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1s ease;
-}
-.profile-center.visible{
-   opacity: 1;
-   pointer-events: auto;
-}
-  top-controls{
-  display: none;
-}
+ @media (max-width: 480px) {
+      .username {
+        font-size: 1.4rem;
+      }
+      .role {
+        font-size: 1rem;
+      }
+      .lang {
+        font-size: 0.9rem;
+      }
+      .avatar {
+        width: 120px;
+        height: 120px;
+      }
+    }
 
 
 
