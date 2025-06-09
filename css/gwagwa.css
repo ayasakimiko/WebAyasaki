@@ -341,7 +341,7 @@ body {
   height: 100vh;
   background: url('https://media1.tenor.com/m/09GiOES0rkoAAAAC/oz-oz-yarimasu.gif') no-repeat center center;
   background-size: cover;
-  filter: blur(15px);
+  filter: blur(7px);
   z-index: 0;
 }
 
