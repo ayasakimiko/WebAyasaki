@@ -6,7 +6,7 @@ body {
   color: #fff;
   font-family: 'Open Sans', sans-serif;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,6 +32,7 @@ body {
   top: 5px;
   left: 5px;
   z-index: 2;
+  display: none;
 }
 
 .volume {
@@ -89,27 +90,24 @@ body {
 /* Profile Center */
 .profile-center {
   position: absolute;
-  top: 0%;       
-  left: 0%;      
-  
-  width: auto;    
-  height: auto;   
-  
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
   padding: 20px;
   text-align: center;
   z-index: 2;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 1.2s ease, transform 1.2s ease;
   perspective: 1000px;
   transform-style: preserve-3d;
   will-change: transform;
   transform-origin: center center;
-  
-
 }
 
 .profile-center.visible {
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* Avatar */
@@ -120,8 +118,6 @@ body {
   border: 3px solid #fff;
   margin-bottom: 10px;
   object-fit: cover;
-}
-.avatar {
   transition: transform 0.4s ease;
   will-change: transform;
 }
@@ -135,6 +131,8 @@ body {
   letter-spacing: 1px;
   line-height: 1.2;
   margin-bottom: 6px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: default;
 }
 
 .username.glow {
@@ -149,44 +147,50 @@ body {
 }
 
 .role.glow {
-  color: #ffffff;
+  color: #d4d4d4de;
   font-size: 16px;
   font-weight: 600;
 }
 
 .lang {
   font-size: 14px;
-  color: #ffffffde;
   margin-bottom: 10px;
   font-weight: 600;
 }
-.username.glow,
-.role.glow,
-.lang {
-  transition: transform 0.3s ease, color 0.3s ease;
-  cursor: default;
+
+.profile-center .lang {
+  color: #c7c7c7d7;
 }
 
 .username.glow:hover,
 .role.glow:hover,
 .lang:hover {
   transform: translateY(-3px) scale(1.05);
-  color: #fff; 
+  color: #fff;
 }
 
 /* Discord Profile */
 .discord-profile {
   display: flex;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.55);
-  border-radius: 12px;
-  padding: 16px 24px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 20px;
   margin: 20px auto 0;
   width: 90%;
-  max-width: 350px;
+  max-width: 500px;
   box-sizing: border-box;
   gap: 16px;
   backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  flex-wrap: wrap;
+  word-break: break-word;
+}
+
+.discord-profile:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .avatar-main {
@@ -197,13 +201,11 @@ body {
   object-fit: cover;
 }
 
-/* Status colors for avatar border */
 .avatar-main.online { border-color: #43b581; }
 .avatar-main.idle { border-color: #faa61a; }
 .avatar-main.dnd { border-color: #f04747; }
 .avatar-main.offline { border-color: #747f8d; }
 
-/* Discord info text */
 .discord-info {
   display: flex;
   flex-direction: column;
@@ -214,40 +216,29 @@ body {
   font-size: 1rem;
   font-weight: 600;
   color: #fafafa;
-}  
+  flex: 1;
+  min-width: 0;
+}
 
 .discord-name-status {
-  font-size: 2.0rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #ffffff;
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 4px;
+  flex-wrap: wrap;
 }
-.discord-profile {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
-    padding: 20px;
-    width: 500px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .discord-profile:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  }
 
-/* Status Dot */
 .status-dot {
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: 5px;
   vertical-align: middle;
-  background-color: #747f8d; 
+  background-color: #747f8d;
 }
 
 .status-dot.online { background-color: #43b581; }
@@ -255,14 +246,6 @@ body {
 .status-dot.dnd { background-color: #f04747; }
 .status-dot.offline { background-color: #747f8d; }
 
-/* Activity status */
-#discord-activity-status {
-  font-size: 14px;
-  color: #ccc;
-  margin-top: -4px;
-  text-align: left;
-  margin-left: 0;
-}
 
 /* Social icons */
 .social-icons {
@@ -270,15 +253,15 @@ body {
   z-index: 80;
   pointer-events: auto;
   display: flex;
-  justify-content: space-between; 
-  gap: 40px; 
-  padding: 0 0px; 
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  padding: 0;
   margin-top: 10px;
 }
 
 .social-icons a {
-  padding: 5px 5px;
-  margin: 0 0px;
+  padding: 1px;
   font-size: 30px;
   color: white;
   cursor: pointer;
@@ -293,11 +276,14 @@ body {
   transform: scale(1.4);
   color: #96ccff;
 }
-/* loading setting */
+
+/* Loading screen */
 #loading-screen {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: #121212;
   color: white;
   font-size: 1.5rem;
@@ -316,7 +302,10 @@ body {
 
 #loading-screen .bg-blur {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: url('https://64.media.tumblr.com/273e48159243483a123f127ed79656d1/88844ae8be4d1091-9c/s540x810/739d22f7e20649a0694419eaa39a0f9b4c5bac59.gifv') center/cover no-repeat;
   filter: blur(8px);
   z-index: 1;
@@ -341,8 +330,10 @@ body {
 
 .bg-blur {
   position: absolute;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: url('https://media1.tenor.com/m/09GiOES0rkoAAAAC/oz-oz-yarimasu.gif') no-repeat center center;
   background-size: cover;
   filter: blur(15px);
@@ -358,6 +349,56 @@ body {
   }
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  .discord-profile {
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .discord-name-status {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    display: inline-flex;    
+    align-items: center;       
+    gap: 8px;                  
+    margin-bottom: 4px;
+  }
+
+.status-dot {
+    width: 14px;               
+    height: 14px;
+    border-radius: 50%;
+    background-color: #747f8d;
+    display: inline-block;
+    vertical-align: middle;
+  } 
+
+
+  .avatar {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .username.glow {
+    font-size: 1.8rem;
+  }
+
+  #enter-text {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+
+  .discord-info {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+
 .profile-center{
     opacity: 0;
     pointer-events: none;
@@ -367,8 +408,8 @@ body {
    opacity: 1;
    pointer-events: auto;
 }
-  top-controls{
-  display: none;
+.top-controls{
+display: none;
 }
 
 
