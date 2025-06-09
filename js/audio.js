@@ -83,12 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
   audio.addEventListener("play", updatePlayPauseIcon);
   audio.addEventListener("pause", updatePlayPauseIcon);
 
-  topVolumeRange.addEventListener("input", (e) => {
-    const volume = e.target.value / 100;
-    audio.volume = volume;
-    if (audio.muted && volume > 0) audio.muted = false;
-    updateVolumeIcon();
-  });
+  topVolumeRange.value = Math.round(audio.volume * 100);
+  updateVolumeIcon();
+  updatePlayPauseIcon();
+});
 
 
 
