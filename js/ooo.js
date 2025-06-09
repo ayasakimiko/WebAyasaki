@@ -85,10 +85,39 @@ ws.addEventListener("message", (event) => {
   } else {
     fullActivityText = statusTextMap[status] || "ไม่มีสถานะ";
   }
+
+  const avatarEl = document.getElementById("discord-avatar");
+  if (avatarEl) {
+    avatarEl.src = avatarUrl;
+    avatarEl.className = `avatar-main ${status}`;
+  }
+
+  const nameEl = document.getElementById("discord-name");
+  if (nameEl) nameEl.textContent = user.username;
+
+  const statusEl = document.getElementById("discord-status");
+  if (statusEl) {
+    statusEl.innerHTML = `<span class="status-dot ${status}"></span> ${statusEmojiMap[status] || ""} ${activityLabel}`;
+  }
+
+  const detailEl = document.getElementById("discord-activity-details");
+  if (detailEl) detailEl.textContent = activityDetail;
+
+  const miniActivityEl = document.getElementById("mini-activity");
+  if (miniActivityEl) miniActivityEl.textContent = activityDetail;
+
+  const fullStatusEl = document.getElementById("discord-activity-status");
+  if (fullStatusEl) fullStatusEl.textContent = fullActivityText;
+
+  const statusDotMini = document.getElementById("mini-status-dot");
+  if (statusDotMini) statusDotMini.className = `status-dot ${status}`;
+});
+
+// Mouse Rotate Effect
 const profile = document.querySelector('.profile-center');
 const maxAngle = 20;
-const deadZoneSizeX = window.innerWidth / 6;  // กำหนด dead zone กว้างประมาณ 1/3 ของครึ่งจอแนวนอน
-const deadZoneSizeY = window.innerHeight / 6; // กำหนด dead zone สูงประมาณ 1/3 ของครึ่งจอแนวตั้ง
+const deadZoneSizeX = window.innerWidth / 6;
+const deadZoneSizeY = window.innerHeight / 6;
 let timeoutId;
 
 window.addEventListener('mousemove', (e) => {
@@ -98,33 +127,41 @@ window.addEventListener('mousemove', (e) => {
   const deltaX = e.clientX - centerX;
   const deltaY = e.clientY - centerY;
 
-  // ถ้าเม้าส์อยู่ใน dead zone ให้นิ่งเลย
   if (Math.abs(deltaX) < deadZoneSizeX && Math.abs(deltaY) < deadZoneSizeY) {
     profile.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
   } else {
-    // หมุนตามเม้าส์เมื่ออยู่นอก dead zone
     const rotateY = (deltaX / centerX) * maxAngle * -1;
     const rotateX = (deltaY / centerY) * maxAngle;
     profile.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   }
 
-  // เคลียร์ timeout เดิม ถ้ามี
   if (timeoutId) clearTimeout(timeoutId);
-
-  // ตั้ง timeout ถ้าเม้าส์นิ่ง 1500ms ให้รีเซ็ตการหมุน
   timeoutId = setTimeout(() => {
     profile.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
   }, 1000);
 });
-window.addEventListener('load', () => {
-  const bgMusic = document.getElementById('bg-music');
-  
-  // พยายามเล่นเพลงทันทีเมื่อโหลดเสร็จ
-  bgMusic.play().catch(() => {
-    // ถ้า autoplay ถูกบล็อก อาจแสดง UI ให้ user กดเล่น
-    console.log('Autoplay was prevented.');
-  });
-});
+
+// Responsive
+function adjustProfileTransform() {
+  if (!profile) return;
+  if (window.matchMedia("(max-width: 600px)").matches) {
+    profile.style.transition = 'transform 0.3s ease';
+    profile.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)';
+  } else {
+    profile.style.transition = '';
+    profile.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+  }
+}
+adjustProfileTransform();
+window.addEventListener('resize', adjustProfileTransform);
+
+// Zoom Mini Player
+const miniPlayer = document.querySelector('.mini-player');
+function toggleZoom() {
+  miniPlayer.classList.toggle('zoomed');
+}
+
+// Page Load
 window.addEventListener('load', () => {
   const loader = document.getElementById('loading-screen');
   const mainContent = document.querySelector('.profile-center');
@@ -134,10 +171,8 @@ window.addEventListener('load', () => {
   const volumeRange = document.getElementById('volume-range');
   const volumeIcon = document.getElementById('volume-icon');
 
-  // ปรับ volume เริ่มต้น
   bgMusic.volume = volumeRange.value / 100;
 
-  // เมื่อกด "เข้าสู่เว็บไซต์"
   enterButton.addEventListener('click', () => {
     loader.classList.add('hidden');
     mainContent.classList.add('visible');
@@ -148,7 +183,6 @@ window.addEventListener('load', () => {
     });
   });
 
-  // volume slider
   volumeRange.addEventListener('input', () => {
     bgMusic.volume = volumeRange.value / 100;
     if (bgMusic.volume === 0) {
@@ -172,97 +206,26 @@ window.addEventListener('load', () => {
     }
   });
 
-  // รอให้กดปุ่มเริ่ม
-  startBtn.addEventListener('click', () => {
+  const startBtn = document.getElementById('start-button');
+  if (startBtn) {
+    startBtn.addEventListener('click', () => {
+      loader.classList.add('hidden');
+      mainContent.classList.add('visible');
+    });
+  }
+
+  loader.addEventListener('click', () => {
     loader.classList.add('hidden');
-    mainContent.classList.add('visible');
-  });
-});
-const loadingScreen = document.getElementById('loading-screen');
-const mainContent = document.querySelector('.profile-center');
-const controls = document.querySelector('.top-controls');
-const bgMusic = document.getElementById('bg-music');
-const volumeRange = document.getElementById('volume-range');
-const volumeIcon = document.getElementById('volume-icon');
+    mainContent.style.opacity = '1';
+    topControls.style.display = 'flex';
 
-
-loadingScreen.addEventListener('click', () => {
-  loadingScreen.classList.add('hidden');
-  mainContent.style.opacity = '1';
-  controls.style.display = 'flex';
-
-  bgMusic.volume = volumeRange.value / 100;
-  bgMusic.play().catch(() => {
-    alert("ไม่สามารถเล่นเพลงได้อัตโนมัติ กรุณาอนุญาตในเบราว์เซอร์ของคุณ");
+    bgMusic.volume = volumeRange.value / 100;
+    bgMusic.play().catch(() => {
+      alert("ไม่สามารถเล่นเพลงได้อัตโนมัติ กรุณาอนุญาตในเบราว์เซอร์ของคุณ");
+    });
   });
 });
 
-  // Update DOM elements
-  const avatarEl = document.getElementById("discord-avatar");
-  if (avatarEl) {
-    avatarEl.src = avatarUrl;
-    avatarEl.className = `avatar-main ${status}`;
-  }
-  // Responsive adjustments for mobile / small screens
-function adjustProfileTransform() {
-  const profile = document.querySelector('.profile-center');
-  const maxAngle = 20;
-
-  if (!profile) return;
-
-  
-  if (window.matchMedia("(max-width: 600px)").matches) {
-    
-    profile.style.transition = 'transform 0.3s ease';
-    profile.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)';
-  } else {
-    
-    profile.style.transition = '';
-    profile.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-  }
-}
-
-// เรียกครั้งแรกตอนโหลด
-adjustProfileTransform();
-
-// เรียกตอนปรับขนาดหน้าจอ
-window.addEventListener('resize', () => {
-  adjustProfileTransform();
-});
-
-window.addEventListener('mousemove', (e) => {
-  if (window.matchMedia("(max-width: 600px)").matches) {
-    return;
-  }
-
-});
-
-const miniPlayer = document.querySelector('.mini-player');
-
-function toggleZoom() {
-  miniPlayer.classList.toggle('zoomed');
-}
-
-  const nameEl = document.getElementById("discord-name");
-  if (nameEl) nameEl.textContent = user.username;
-
-  const statusEl = document.getElementById("discord-status");
-  if (statusEl) {
-    statusEl.innerHTML = `<span class="status-dot ${status}"></span> ${statusEmojiMap[status] || ""} ${activityLabel}`;
-  }
-
-  const detailEl = document.getElementById("discord-activity-details");
-  if (detailEl) detailEl.textContent = activityDetail;
-
-  const miniActivityEl = document.getElementById("mini-activity");
-  if (miniActivityEl) miniActivityEl.textContent = activityDetail;
-
-  const fullStatusEl = document.getElementById("discord-activity-status");
-  if (fullStatusEl) fullStatusEl.textContent = fullActivityText;
-
-  const statusDotMini = document.getElementById("mini-status-dot");
-  if (statusDotMini) statusDotMini.className = `status-dot ${status}`;
-});
 
 
 
