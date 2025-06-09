@@ -350,12 +350,14 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 768px) { 
   .discord-profile {
     flex-direction: column;
     align-items: center;
     width: 95%;
     padding: 1rem;
+    transform: scale(1); 
+    transform-origin: top center;
   }
 
   .discord-name-status {
@@ -396,6 +398,20 @@ body {
     align-items: center;
     text-align: center;
   }
+
+  .mini-player {
+    margin-top: 2rem;
+    margin-bottom: 8rem; /* ✅ เพิ่มพื้นที่ด้านล่างของ mini-player */
+  }
+
+  .profile-center {
+    width: auto;      /* ขยายตามเนื้อหา */
+    height: auto;     /* สูงตามเนื้อหา */
+    padding-bottom: 8rem; /* ✅ เพิ่ม padding ล่างให้เลื่อนลงได้ */
+    margin-top: 0; /* ลบช่องว่างด้านบน */
+    padding-top: 2rem; /* ถ้าต้องการเว้นช่องว่างเล็กน้อย */
+  }
+
 }
 
 
