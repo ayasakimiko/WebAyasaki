@@ -312,7 +312,7 @@ body {
   right: 0;
   bottom: 0;
   background: url('https://64.media.tumblr.com/273e48159243483a123f127ed79656d1/88844ae8be4d1091-9c/s540x810/739d22f7e20649a0694419eaa39a0f9b4c5bac59.gifv') center/cover no-repeat;
-  filter: blur(8px);
+  filter: blur(4px);
   z-index: 1;
 }
 
