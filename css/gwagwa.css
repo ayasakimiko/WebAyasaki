@@ -370,7 +370,7 @@ body {
     margin-bottom: 4px;
   }
 
-.status-dot {
+ .status-dot {
     width: 14px;               
     height: 14px;
     border-radius: 50%;
@@ -401,19 +401,18 @@ body {
 
   .mini-player {
     margin-top: 2rem;
-    margin-bottom: 8rem; /* ✅ เพิ่มพื้นที่ด้านล่างของ mini-player */
+    margin-bottom: 8rem; 
   }
 
   .profile-center {
-    width: auto;      /* ขยายตามเนื้อหา */
-    height: auto;     /* สูงตามเนื้อหา */
-    padding-bottom: 8rem; /* ✅ เพิ่ม padding ล่างให้เลื่อนลงได้ */
-    margin-top: 0; /* ลบช่องว่างด้านบน */
-    padding-top: 2rem; /* ถ้าต้องการเว้นช่องว่างเล็กน้อย */
+    width: auto;     
+    height: auto;     
+    padding-bottom: 8rem; 
+    margin-top: 0; 
+    padding-top: 2rem; 
   }
 
 }
-
 
 .profile-center{
     opacity: 0;
