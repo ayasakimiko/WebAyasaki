@@ -1,0 +1,148 @@
+/* Mini Player */
+.mini-player {
+  position: fixed;
+  bottom: -20%;                 
+  left: 15%;                  
+  max-width: 95vw;
+  padding: 1.15rem 1.15rem;
+
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 500;
+  gap: 0.625rem;
+
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+
+  transform-origin: center center;
+  transition: transform 0.3s ease, width 0.3s ease, padding 0.3s ease;
+}
+
+.mini-player:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.mini-player:hover .mini-cover {
+  filter: brightness(1.1);
+  transition: filter 0.3s ease;
+}
+
+.mini-player:hover .mini-title {
+  color: #82c1fd;
+  transition: color 0.3s ease;
+}
+
+/* รูปปก */
+.mini-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+/* ข้อมูลเพลง */
+.mini-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow: hidden;
+}
+
+.mini-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.mini-time {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+/* แถบ seek */
+#mini-seek {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 5px;
+  border-radius: 3px;
+  background: #444;
+  cursor: pointer;
+}
+
+#mini-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  margin-top: -5px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+
+/* ปุ่มเล่น/หยุด */
+#mini-toggle {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+#mini-toggle:hover {
+  color: #c0fbff;
+}
+
+/* Profile Center */
+.profile-center {
+  position: relative;
+  width: 320px;
+  margin: 4rem auto 0 auto;
+  text-align: center;
+  opacity: 1;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.username {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.role {
+  font-size: 1.1rem;
+  color: #bbb;
+  margin-bottom: 0.5rem;
+}
+
+.lang {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #888;
+}
+
+
+
+
