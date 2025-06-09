@@ -90,20 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateVolumeIcon();
   });
 
-  muteBtn.addEventListener("click", () => {
-    audio.muted = !audio.muted;
-    if (!audio.muted && audio.volume === 0) {
-      audio.volume = 0.5;
-      topVolumeRange.value = 50;
-    }
-    updateVolumeIcon();
-  });
-
-
-  topVolumeRange.value = Math.round(audio.volume * 100);
-  updateVolumeIcon();
-  updatePlayPauseIcon();
-});
 
 
 
