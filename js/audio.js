@@ -1,108 +1,156 @@
-// Audio Full setting
 document.addEventListener("DOMContentLoaded", () => {
-  const audio = document.getElementById("bg-music");
-  const playBtn = document.getElementById("mini-toggle");
-  const muteBtn = document.getElementById("volume-icon");
-  const topVolumeRange = document.getElementById("volume-range");
-  const currentTimeEl = document.getElementById("mini-current");
-  const durationEl = document.getElementById("mini-duration");
-  const seekBar = document.getElementById("mini-seek");
-  const miniTitle = document.querySelector(".mini-title");
+    // ───── ELEMENTS ─────
+    const audio = document.getElementById("bg-music");
+    const playBtn = document.getElementById("mini-toggle");
+    const muteBtn = document.getElementById("volume-icon");
+    const topVolumeRange = document.getElementById("volume-range");
+    const currentTimeEl = document.getElementById("mini-current");
+    const durationEl = document.getElementById("mini-duration");
+    const seekBar = document.getElementById("mini-seek");
+    const miniTitle = document.querySelector(".mini-title");
 
-  function formatTime(seconds) {
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  }
+    // ───── STATE ─────
+    let lastVolume = audio?.volume ?? 0.5;
 
-  function updatePlayPauseIcon() {
-    playBtn.innerHTML = audio.paused
-      ? '<i class="fas fa-play"></i>'
-      : '<i class="fas fa-pause"></i>';
-  }
+    // ───── UTILITIES ─────
+    const formatTime = (seconds) => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    };
 
-  function updateVolumeIcon() {
-    let iconClass;
-    if (audio.muted || audio.volume === 0) iconClass = 'fa-volume-mute';
-    else if (audio.volume <= 0.5) iconClass = 'fa-volume-down';
-    else iconClass = 'fa-volume-up';
+    const extractFilename = (url) => {
+        let name = url.substring(url.lastIndexOf('/') + 1);
+        name = decodeURIComponent(name);
+        return name.includes('.') ? name.substring(0, name.lastIndexOf('.')) : name;
+    };
 
-    muteBtn.className = `fas ${iconClass}`;
-  }
+    const updatePlayPauseIcon = () => {
+        if (!playBtn || !audio) return;
+        playBtn.innerHTML = audio.paused
+            ? '<i class="fas fa-play"></i>'
+            : '<i class="fas fa-pause"></i>';
+    };
 
-  function extractFilename(url) {
-    let filename = url.substring(url.lastIndexOf('/') + 1);
-    filename = decodeURIComponent(filename);
-    if (filename.includes('.')) {
-      filename = filename.substring(0, filename.lastIndexOf('.'));
+    const updateVolumeIcon = () => {
+        if (!muteBtn || !audio) return;
+        let icon = 'fa-volume-up';
+        if (audio.muted || audio.volume === 0) icon = 'fa-volume-mute';
+        else if (audio.volume <= 0.5) icon = 'fa-volume-down';
+        muteBtn.className = `fas ${icon}`;
+    };
+
+    const updateSeekBarProgress = () => {
+        if (!audio || !seekBar || !audio.duration) return;
+        const progress = (audio.currentTime / audio.duration) * 100;
+        seekBar.style.setProperty('--seek-progress', `${progress}%`);
+    };
+
+    // ───── INITIALIZE ─────
+    if (audio) {
+        const audioSrc = audio.querySelector("source")?.src || audio.src;
+        miniTitle.textContent = extractFilename(audioSrc) || "Unknown Track";
+        audio.volume = audio.volume ?? 0.5;
+        if (topVolumeRange) {
+            topVolumeRange.value = Math.round(audio.volume * 100);
+            lastVolume = audio.volume;
+        }
+        updateVolumeIcon();
+        updatePlayPauseIcon();
     }
-    return filename;
-  }
 
-  const audioSrc = audio.querySelector("source")?.src || audio.src;
-  if (audioSrc && miniTitle) {
-    miniTitle.textContent = extractFilename(audioSrc);
-  }
+    // ───── EVENTS: AUDIO ─────
+    if (audio) {
+        audio.addEventListener("loadedmetadata", () => {
+            seekBar && (seekBar.max = audio.duration);
+            durationEl && (durationEl.textContent = formatTime(audio.duration));
+            currentTimeEl && (currentTimeEl.textContent = "0:00");
+            seekBar && (seekBar.value = 0);
+            updateSeekBarProgress();
+        });
 
-  function updateSeekBarProgress() {
-    if (!audio.duration) return;
-    const progressPercent = (audio.currentTime / audio.duration) * 100;
-    seekBar.style.setProperty('--seek-progress', `${progressPercent}%`);
-  }
+        audio.addEventListener("timeupdate", () => {
+            currentTimeEl && (currentTimeEl.textContent = formatTime(audio.currentTime));
+            seekBar && (seekBar.value = audio.currentTime);
+            updateSeekBarProgress();
+            if (audio.currentTime >= audio.duration && !audio.loop) {
+                seekBar && (seekBar.value = seekBar.max);
+                durationEl && (durationEl.textContent = formatTime(audio.duration));
+                updatePlayPauseIcon();
+            }
+        });
 
-  audio.addEventListener("loadedmetadata", () => {
-    seekBar.max = audio.duration;
-    if(durationEl) durationEl.textContent = formatTime(audio.duration);
-    currentTimeEl.textContent = `0:00`;
-    seekBar.value = 0;
-    updateSeekBarProgress();
-  });
-
-  audio.addEventListener("timeupdate", () => {
-    currentTimeEl.textContent = formatTime(audio.currentTime);
-    seekBar.value = audio.currentTime;
-    updateSeekBarProgress();
-
-    if (audio.currentTime >= audio.duration) {
-      seekBar.value = seekBar.max;
-      if(durationEl) durationEl.textContent = formatTime(audio.duration);
-      updatePlayPauseIcon();
+        audio.addEventListener("play", updatePlayPauseIcon);
+        audio.addEventListener("pause", updatePlayPauseIcon);
     }
-  });
 
-  seekBar.addEventListener("input", () => {
-    audio.currentTime = seekBar.value;
-    updateSeekBarProgress();
-  });
+    // ───── EVENTS: USER INPUT ─────
+    seekBar?.addEventListener("input", () => {
+        if (audio) {
+            audio.currentTime = seekBar.value;
+            updateSeekBarProgress();
+        }
+    });
 
-  playBtn.addEventListener("click", () => {
-    if (audio.paused) audio.play();
-    else audio.pause();
-  });
+    playBtn?.addEventListener("click", () => {
+        if (audio) {
+            audio.paused ? audio.play() : audio.pause();
+        }
+    });
 
-  audio.addEventListener("play", updatePlayPauseIcon);
-  audio.addEventListener("pause", updatePlayPauseIcon);
+    muteBtn?.addEventListener("click", () => {
+        if (!audio || !topVolumeRange) return;
+        if (audio.muted) {
+            audio.muted = false;
+            audio.volume = lastVolume || 0.5;
+            topVolumeRange.value = Math.round(audio.volume * 100);
+        } else {
+            if (audio.volume > 0) lastVolume = audio.volume;
+            audio.muted = true;
+            audio.volume = 0;
+            topVolumeRange.value = 0;
+        }
+        updateVolumeIcon();
+    });
 
-  // mute/unmute ---
-  muteBtn.addEventListener("click", () => {
-    audio.muted = !audio.muted;
-    if (!audio.muted && audio.volume === 0) {
-      audio.volume = 1; 
-      topVolumeRange.value = 100;
-    }
-    updateVolumeIcon();
-  });
+    topVolumeRange?.addEventListener("input", () => {
+        if (!audio || !muteBtn) return;
+        const newVol = topVolumeRange.value / 100;
+        audio.volume = newVol;
+        audio.muted = newVol === 0;
+        if (newVol > 0) lastVolume = newVol;
+        updateVolumeIcon();
+    });
+});
 
-  topVolumeRange.addEventListener("input", () => {
-    audio.volume = topVolumeRange.value / 100;
-    audio.muted = false;
-    updateVolumeIcon();
-  });
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loading-screen');
+    const mainContent = document.querySelector('.profile-center');
+    const topControls = document.querySelector('.top-controls');
+    const bgMusic = document.getElementById('bg-music');
+    const enterTextButton = document.getElementById('enter-text');
+    const topVolumeRange = document.getElementById("volume-range");
 
-  // volume slider icon
-  topVolumeRange.value = Math.round(audio.volume * 100);
-  updateVolumeIcon();
-  updatePlayPauseIcon();
+    const handleStart = () => {
+        loader?.classList.add('hidden');
+        mainContent?.classList.add('visible');
+
+        if (topControls) {
+            topControls.style.display = 'flex';
+            topControls.style.opacity = '1';
+            topControls.style.pointerEvents = 'auto';
+        }
+
+        if (bgMusic) {
+            bgMusic.volume = topVolumeRange ? topVolumeRange.value / 100 : 0.5;
+            bgMusic.play().catch((e) => {
+                console.log('Autoplay was blocked:', e);
+            });
+        }
+    };
+
+    enterTextButton?.addEventListener('click', handleStart);
+    loader?.addEventListener('click', handleStart);
 });
 
 
