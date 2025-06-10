@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const muteBtn = document.getElementById("volume-icon");
   const topVolumeRange = document.getElementById("volume-range");
   const currentTimeEl = document.getElementById("mini-current");
-  const durationEl = document.getElementById("mini-duration"); 
+  const durationEl = document.getElementById("mini-duration");
   const seekBar = document.getElementById("mini-seek");
   const miniTitle = document.querySelector(".mini-title");
 
@@ -83,10 +83,28 @@ document.addEventListener("DOMContentLoaded", () => {
   audio.addEventListener("play", updatePlayPauseIcon);
   audio.addEventListener("pause", updatePlayPauseIcon);
 
+  // mute/unmute ---
+  muteBtn.addEventListener("click", () => {
+    audio.muted = !audio.muted;
+    if (!audio.muted && audio.volume === 0) {
+      audio.volume = 1; 
+      topVolumeRange.value = 100;
+    }
+    updateVolumeIcon();
+  });
+
+  topVolumeRange.addEventListener("input", () => {
+    audio.volume = topVolumeRange.value / 100;
+    audio.muted = false;
+    updateVolumeIcon();
+  });
+
+  // volume slider icon
   topVolumeRange.value = Math.round(audio.volume * 100);
   updateVolumeIcon();
   updatePlayPauseIcon();
 });
+
 
 
 
