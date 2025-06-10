@@ -153,6 +153,16 @@ window.addEventListener('load', () => {
     loader?.addEventListener('click', handleStart);
 });
 
+function syncSeekBar() {
+    if (audio && seekBar && !isNaN(audio.duration)) {
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        seekBar.value = audio.currentTime;
+        updateSeekBarProgress();
+    }
+    requestAnimationFrame(syncSeekBar);
+}
+
+
 
 
 
