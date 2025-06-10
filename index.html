@@ -2,19 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@AyasakiWEB</title>
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/gwagwa.css" />
   <link rel="stylesheet" href="css/aaa.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+  
   <!-- Loading Screen -->
   <div id="loading-screen">
     <div class="bg-blur"></div>
     <div id="enter-text">START</div>
   </div>
 
+  <!-- Overlay -->
   <div class="overlay"></div>
 
   <!-- Volume & Music Control -->
@@ -24,7 +28,13 @@
         <i class="fas fa-volume-up" id="volume-icon" style="cursor: pointer;"></i>
         <div class="tooltip"></div>
       </div>
-      <input type="range" id="volume-range" class="volume-slider" min="0" max="100" value="50">
+      <input 
+        type="range" 
+        id="volume-range" 
+        class="volume-slider" 
+        min="0" max="100" 
+        value="50" 
+      />
       <audio id="bg-music" loop>
         <source src="https://raw.githubusercontent.com/ayasakimiko/my-music/main/Zoltraak%20!!.mp3" type="audio/mp3" />
       </audio>
@@ -33,49 +43,77 @@
 
   <!-- Profile Center -->
   <div class="profile-center" style="opacity:0;">
-    <img src="https://media1.tenor.com/m/qlpIadFPgesAAAAC/anime-frieren.gif" class="avatar" alt="Avatar">
+    <img 
+      src="https://media1.tenor.com/m/qlpIadFPgesAAAAC/anime-frieren.gif" 
+      class="avatar" 
+      alt="Avatar" 
+    />
     <div class="username glow">AyasakiMiko</div>
     <div class="role glow">Gamer🎮/Edit🎥/Coding💻</div>
     <div class="lang">🔶I'm from Thailand🔶</div>
+
     <!-- Discord Info Box -->
     <div class="discord-profile">
-      <img id="discord-avatar" class="avatar-main" src="" alt="Avatar">
+      <img id="discord-avatar" class="avatar-main" src="" alt="Avatar" />
       <div class="discord-info">
         <div class="discord-name-status">
-          <span id="discord-name">kaguyamio_</span>
+          <span id="discord-name"></span>
           <span class="status-dot dnd" id="mini-status-dot"></span>
         </div>
-        <div id="discord-activity-status" style="font-size: 13px; color: #aaa; margin-top: -4px;"></div>
+        <div 
+          id="discord-activity-status" 
+          style="font-size: 1rem; color: #ccc;"
+        ></div> 
       </div>
     </div>
+
     <!-- Social Icons -->
     <div class="social-icons">
-      <a href="https://www.instagram.com/miko_4779/" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.facebook.com/pattanapong.siripan.2025/" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.tiktok.com/@remi_5690" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://discordapp.com/users/626071745576828955" target="_blank"><i class="fab fa-discord"></i></a>
-      <a href="https://steamcommunity.com/id/002532/" target="_blank"><i class="fab fa-steam"></i></a>
+      <a href="https://www.instagram.com/_gxuyxs?igsh=N3ZwbTQyMm1wdmQy" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.facebook.com/bodpe.kayjk?rdid=AvHDFeUI8o4BM2as&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F151ASSnjPZp%2F#" target="_blank">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://www.tiktok.com/@remi_5690" target="_blank">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://discordapp.com/users/626071745576828955" target="_blank">
+        <i class="fab fa-discord"></i>
+      </a>
+      <a href="https://steamcommunity.com/id/002532/" target="_blank">
+        <i class="fab fa-steam"></i>
+      </a>
     </div>
-    <!-- Mini song -->
+
+    <!-- Mini Song Player -->
     <div class="mini-player" id="mini-player">
-  <img src="https://media.tenor.com/WKPXrrxUvEgAAAAi/frieren-kuru-kuru.gif" class="mini-cover" alt="Cover" />
-  <div class="mini-info">
-    <div class="mini-title">End of Beginning</div>
-    <div class="mini-time">
-      <span id="mini-current">0:00</span>
+      <img 
+        src="https://media.tenor.com/WKPXrrxUvEgAAAAi/frieren-kuru-kuru.gif" 
+        class="mini-cover" 
+        alt="Cover" 
+      />
+      <div class="mini-info">
+        <div class="mini-title">End of Beginning</div>
+        <div class="mini-time">
+          <span id="mini-current">0:00</span>
+        </div>
+        <input type="range" id="mini-seek" value="0" />
+      </div>
+      <button id="mini-toggle">
+        <i class="fas fa-play"></i>
+      </button>
     </div>
-    <input type="range" id="mini-seek" value="0" />
   </div>
-  <button id="mini-toggle"><i class="fas fa-play"></i></button>
-</div>
-  </div>
+
   <span style="margin-right: 1000px;"></span>
 
+  <!-- Scripts -->
   <script src="js/ooo.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/zoom.js"></script>
 
-  <!-- loading setting java script -->
+  <!-- Loading screen & music control -->
   <script>
     const loadingScreen = document.getElementById('loading-screen');
     const mainContent = document.querySelector('.profile-center');
@@ -91,50 +129,28 @@
 
       bgMusic.volume = volumeRange.value / 100;
       bgMusic.play().catch(() => {
-        alert("ไม่สามารถเล่นเพลงได้อัตโนมัติ กรุณาอนุญาตในเบราว์เซอร์ของคุณ");
+        alert("ไม่สามารถเล่นเพลงได้อัตโนมัติได้");
       });
-    });
-
-    volumeRange.addEventListener('input', () => {
-      bgMusic.volume = volumeRange.value / 100;
-      if (bgMusic.volume === 0) {
-        volumeIcon.className = 'fas fa-volume-mute';
-      } else if (bgMusic.volume <= 0.5) {
-        volumeIcon.className = 'fas fa-volume-down';
-      } else {
-        volumeIcon.className = 'fas fa-volume-up';
-      }
-    });
-
-    volumeIcon.addEventListener('click', () => {
-      if (bgMusic.volume > 0) {
-        bgMusic.volume = 0;
-        volumeRange.value = 0;
-        volumeIcon.className = 'fas fa-volume-mute';
-      } else {
-        bgMusic.volume = 0.5;
-        volumeRange.value = 100;
-        volumeIcon.className = 'fas fa-volume-down';
-      }
     });
   </script>
 
-<!-- screen lock -->
+  <!-- Screen lock scale -->
   <script>
     function scaleToFit() {
       const scaleX = window.innerWidth / 1920;
       const scaleY = window.innerHeight / 1080;
       const scale = Math.min(scaleX, scaleY);
-  
+
       const screen = document.querySelector('.screen-locked');
       if (screen) {
         screen.style.transform = `scale(${scale})`;
       }
     }
-  
+
     window.addEventListener('resize', scaleToFit);
     window.addEventListener('load', scaleToFit);
   </script>
+  
 </body>
 </html>
 
