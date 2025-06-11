@@ -483,9 +483,19 @@ body {
   max-width: 90vw;
   box-sizing: border-box;
   display: flex;
+  align-items: center;
   justify-content: center;
   flex-wrap: wrap; 
+  text-align: center;
 }
+
+.mini-player img,
+  .discord-profile img,img {
+    display: block; 
+    margin: 0 auto; 
+    max-width: 100%; 
+    height: auto; 
+  }
 
 .social-icons {
   position: relative;
