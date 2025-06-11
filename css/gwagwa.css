@@ -123,14 +123,14 @@ body {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 3px solid #fff;
+  border: 3px solid #4a216b;
   margin-bottom: 10px;
   object-fit: cover;
   transition: transform 0.4s ease, box-shadow 0.4s ease; 
   will-change: transform;
   box-shadow:
-    0 0 5px rgba(255, 255, 255, 0.8), 
-    0 0 12px rgba(255, 255, 255, 0.6), 
+    0 0 5px rgba(242, 191, 255, 0.8), 
+    0 0 12px rgb(212, 148, 255), 
     0 0 22px rgba(138, 43, 226, 0.5),     
     0 0 35px rgba(148, 0, 211, 0.4);      
 }
@@ -138,13 +138,11 @@ body {
 .avatar:hover {
   transform: scale(1.05) translateY(-5px);
   box-shadow:
-    0 0 10px rgba(255, 255, 255, 1), 
-    0 0 18px rgba(255, 255, 255, 0.8),
+    0 0 10px rgb(227, 183, 252), 
+    0 0 18px rgba(213, 168, 255, 0.8),
     0 0 35px rgba(138, 43, 226, 0.6),
     0 0 55px rgba(148, 0, 211, 0.5);
 }
-
-
 
 /* Username and role with glow */
 .username.glow, .role.glow, .lang {
