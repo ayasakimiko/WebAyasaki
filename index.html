@@ -35,7 +35,7 @@
         min="0" max="100" 
         value="50" 
       />
-      <audio id="bg-music" loop>
+      <audio id="bg-music" loop preload="auto">
         <source src="https://github.com/ayasakimiko/my-music/raw/main/H.S.K.T.mp3" type="audio/mpeg" />
       </audio>
     </div>
@@ -129,14 +129,15 @@
       if (controls) controls.style.display = 'flex';
 
       if (bgMusic) {
-        const volumeValue = volumeRange ? volumeRange.value / 100 : 0.5;
-        bgMusic.volume = volumeValue;
-        bgMusic.play().catch(() => {
-          alert("ไม่สามารถเล่นเพลงได้อัตโนมัติ");
-        });
-      }
-    };
+         const volumeValue = volumeRange ? volumeRange.value / 100 : 0.5;
+         bgMusic.volume = volumeValue;
 
+        bgMusic.play().catch((err) => {
+        alert("ไม่สามารถเล่นเพลงได้ กรุณาคลิกอีกครั้ง");
+        console.error(err);
+      });
+     }
+    };
     loadingScreen?.addEventListener('click', handleStart);
   });
   </script>
