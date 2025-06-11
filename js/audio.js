@@ -46,6 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
         seekBar.style.setProperty('--seek-progress', `${progress}%`);
     };
 
+    const syncSeekBar = () => {
+        if (audio && seekBar && !isNaN(audio.duration)) {
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+            seekBar.value = audio.currentTime;
+            updateSeekBarProgress();
+        }
+        requestAnimationFrame(syncSeekBar);
+    };
+
     // ───── INITIALIZE ─────
     if (audio) {
         const audioSrc = audio.querySelector("source")?.src || audio.src;
@@ -121,6 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (newVol > 0) lastVolume = newVol;
         updateVolumeIcon();
     });
+
+    syncSeekBar();
 });
 
 window.addEventListener('load', () => {
@@ -152,15 +163,6 @@ window.addEventListener('load', () => {
     enterTextButton?.addEventListener('click', handleStart);
     loader?.addEventListener('click', handleStart);
 });
-
-function syncSeekBar() {
-    if (audio && seekBar && !isNaN(audio.duration)) {
-        currentTimeEl.textContent = formatTime(audio.currentTime);
-        seekBar.value = audio.currentTime;
-        updateSeekBarProgress();
-    }
-    requestAnimationFrame(syncSeekBar);
-}
 
 
 
