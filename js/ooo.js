@@ -197,6 +197,35 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+/*-----------------------------
+| Mouse Rotate Effect Intro
+------------------------------*/
+
+const enterText = document.getElementById('enter-text');
+const maxTilt = 15; 
+const shakeAmount = 1.5; 
+
+window.addEventListener('mousemove', (e) => {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  const offsetX = e.clientX - centerX;
+  const offsetY = e.clientY - centerY;
+
+  let rotateX = (-offsetY / centerY) * maxTilt;
+  let rotateY = (offsetX / centerX) * maxTilt;
+
+  rotateX += (Math.random() * shakeAmount * 2) - shakeAmount; 
+  rotateY += (Math.random() * shakeAmount * 2) - shakeAmount;
+
+  enterText.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+});
+
+window.addEventListener('mouseleave', () => {
+  enterText.style.transform = 'rotateX(0deg) rotateY(0deg)';
+});
+
+
 
 
 
