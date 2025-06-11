@@ -422,6 +422,11 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+.overlay {
+  background-size: cover;
+  filter: blur(3px);
+  opacity: 0.5;
+}
 .profile-center {
   position: static;
   transform: none;
