@@ -427,6 +427,7 @@ body {
   filter: blur(3px);
   opacity: 0.5;
 }
+
 .profile-center {
   position: static;
   transform: none;
@@ -467,7 +468,7 @@ body {
   background-color: #747f8d;
   display: inline-block;
   vertical-align: middle;
-  }
+}
 
 #enter-text {
   font-size: 2rem;
@@ -495,12 +496,13 @@ body {
 }
 
 .mini-player img,
-  .discord-profile img,img {
-    display: block; 
-    margin: 0 auto; 
-    max-width: 100%; 
-    height: auto; 
-  }
+.discord-profile img,
+img {
+  display: block; 
+  margin: 0 auto; 
+  max-width: 100%; 
+  height: auto; 
+}
 
 .social-icons {
   position: relative;
@@ -515,6 +517,7 @@ body {
   margin-top: 20px;
   width: 100%;
 }
+
 .social-icons a {
   padding: 0;
   font-size: 30px;
@@ -525,7 +528,7 @@ body {
   z-index: 1000;
   pointer-events: auto;
   transition: transform 0.3s ease, color 0.3s ease;
-}
+  }
 }
 
 .profile-center {
