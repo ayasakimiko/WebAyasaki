@@ -144,6 +144,8 @@ body {
     0 0 55px rgba(148, 0, 211, 0.5);
 }
 
+
+
 /* Username and role with glow */
 .username.glow, .role.glow, .lang {
   letter-spacing: 1px;
@@ -202,6 +204,10 @@ body {
   width: 90%;
   max-width: 500px;
   box-sizing: border-box;
+  box-shadow:
+    0 0 20px rgba(143, 0, 255, 0.7),   
+    0 0 30px rgba(255, 255, 255, 0.6),       
+    0 6px 12px rgba(188, 72, 255, 0.3);   
   gap: 16px; 
   backdrop-filter: blur(6px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -212,7 +218,10 @@ body {
 
 .discord-profile:hover {
   transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 25px rgba(144, 0, 255, 0.596),
+    0 0 35px rgba(158, 84, 255, 0.6),
+    0 6px 12px rgba(255, 255, 255, 0.3);
 }
 
 .avatar-main {
