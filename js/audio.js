@@ -122,14 +122,17 @@ document.addEventListener("DOMContentLoaded", () => {
         updateVolumeIcon();
     });
 
-    topVolumeRange?.addEventListener("input", () => {
-        if (!audio || !muteBtn) return;
+    const handleVolumeChange = () => {
+        if (!audio || !muteBtn || !topVolumeRange) return;
         const newVol = topVolumeRange.value / 100;
         audio.volume = newVol;
         audio.muted = newVol === 0;
         if (newVol > 0) lastVolume = newVol;
         updateVolumeIcon();
-    });
+    };
+
+    topVolumeRange?.addEventListener("input", handleVolumeChange);
+    topVolumeRange?.addEventListener("touchmove", handleVolumeChange);
 
     syncSeekBar();
 });
