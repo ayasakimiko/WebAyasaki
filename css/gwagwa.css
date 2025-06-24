@@ -29,6 +29,23 @@ body {
   opacity: 0.6;
 }
 
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: #ffffff;
+  font-size: 1em;
+  pointer-events: none;
+  z-index: 1000;
+  animation: fall linear infinite;
+  user-select: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
 /* Volume Control */
 .top-controls {
   position: absolute;
@@ -329,7 +346,7 @@ body {
   align-items: center;
   gap: 25px;
   padding: 1px 1px 1px 1px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .social-icons a {
@@ -422,123 +439,177 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-.overlay {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100vw;
-  height: 100vh;
-  filter: blur(3px);
-  opacity: 0.5;
-}
+  .overlay {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(3px);
+    opacity: 0.5;
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
 
-.profile-center {
-  position: static;
-  transform: none;
-  width: 100%;
-  max-width: 100vw;
-  padding: 0 1rem;
-  box-sizing: border-box;
-  margin: 2rem auto 0 auto;
-  opacity: 1;
-  pointer-events: auto;
-  text-align: center;
-}
+  .profile-center {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 100vw;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    margin: 2rem auto 0 auto;
+    opacity: 1;
+    pointer-events: auto;
+    text-align: center;
+  }
 
-.discord-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 1rem;
-  box-sizing: border-box;
-}
+  .discord-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
 
-.discord-name-status {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-  justify-content: center;
-}
+  .discord-name-status {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    justify-content: center;
+  }
 
-.status-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: #747f8d;
-  display: inline-block;
-  vertical-align: middle;
-}
+  .status-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #747f8d;
+    display: inline-block;
+    vertical-align: middle;
+  }
 
-#enter-text {
-  font-size: 2rem;
-  padding: 1rem;
-}
+  #enter-text {
+    font-size: 2rem;
+    padding: 1rem;
+  }
 
-.discord-info {
-  text-align: center;
-  align-items: center;
-}
+  .discord-info {
+    text-align: center;
+    align-items: center;
+  }
 
-.mini-player {
-  position: relative !important;
-  bottom: auto !important;
-  left: auto !important;
-  margin-top: 1rem;
-  width: auto;
-  max-width: 90vw;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap; 
-  text-align: center;
-}
+  .mini-player {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    max-width: 280px;
+    width: 100%;
+    padding: 0.5rem 0.7rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    box-sizing: border-box;
+    backdrop-filter: blur(5px);
+    position: absolute;
+    left: 1%;
+    bottom: 40px;
+    z-index: 9999;
+    margin: 0;
+    transition: all 0.3s ease;
+  }
 
-.mini-player img,
-.discord-profile img,
-img {
-  display: block; 
-  margin: 0 auto; 
-  max-width: 100%; 
-  height: auto; 
-}
+  .mini-player img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
 
-.social-icons {
-  position: relative;
-  left: auto;
-  z-index: 80;
-  pointer-events: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 35px;
-  padding: 1px;
-  margin-top: 20px;
-  width: 100%;
-}
+  .mini-player .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: white;
+    line-height: 1.2;
+    overflow: hidden;
+  }
 
-.social-icons a {
-  padding: 0;
-  font-size: 30px;
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  z-index: 1000;
-  pointer-events: auto;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
+  .mini-player .controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 4px;
+    height: 20px;
+  }
+
+  .mini-player input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px;
+    background: transparent;
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .mini-player input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    top: 0px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+
+  .mini-player input[type="range"]::-moz-range-track {
+    background: transparent;
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  .mini-player input[type="range"]::-moz-range-thumb {
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+  }
+
+  .social-icons {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0px;
+    align-items: center;
+    gap: 25px;
+    margin-top: 20px;
+    width: 100%;
+    pointer-events: auto;
+  }
+
+  .social-icons a {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
 }
 
 .profile-center {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1s ease; 
+  transition: opacity 1s ease;
 }
 
 .profile-center.visible {
@@ -547,25 +618,25 @@ img {
 }
 
 .top-controls {
-  display: flex; 
-  opacity: 0; 
-  transition: opacity 0.5s ease; 
-  position: absolute; 
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: absolute;
   top: 20px;
   right: 20px;
   z-index: 100;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .top-controls.visible {
   opacity: 1;
-  pointer-events: auto; 
+  pointer-events: auto;
 }
 
 #discord-status,
 #discord-activity-details,
 #mini-activity {
-  display: none !important; 
+  display: none !important;
 }
 
 
