@@ -2,7 +2,7 @@
 .mini-player {
   position: fixed;
   bottom: -23%;
-  left: 0%;
+  right: 7.5%;
   max-width: 100vw;
   padding: 1rem 1rem;
 
