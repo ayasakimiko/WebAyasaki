@@ -6,7 +6,7 @@
   max-width: 100vw;
   padding: 1rem 1rem;
 
-  background: rgba(58, 0, 92, 0.4);
+  background: rgba(92, 0, 0, 0.4);
   backdrop-filter: blur(3px);
   color: white;
 
@@ -15,9 +15,9 @@
   border-radius: 1.25rem;
 
   box-shadow:
-    0 0 20px rgba(143, 0, 255, 0.7),   
-    0 0 30px rgba(255, 255, 255, 0.6),       
-    0 6px 12px rgba(188, 72, 255, 0.3);     
+    0 0 20px rgba(168, 20, 20, 0.932),   
+    0 0 30px rgba(185, 38, 38, 0.808),       
+    0 6px 12px rgba(230, 35, 35, 0.644);     
 
   z-index: 500;
   gap: 20px;
@@ -33,10 +33,10 @@
 .mini-player:hover {
   transform: scale(1.05);
   box-shadow:
-    0 0 25px rgba(144, 0, 255, 0.596),
-    0 0 35px rgba(158, 84, 255, 0.6),
-    0 6px 12px rgba(255, 255, 255, 0.3);
-  background: rgba(58, 0, 112, 0.411);
+    0 0 25px rgba(243, 19, 19, 0.932),
+    0 0 35px rgba(134, 13, 13, 0.856),
+    0 6px 12px rgba(209, 24, 24, 0.945);
+  background: rgba(124, 1, 1, 0.411);
   cursor: pointer;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .mini-player:hover .mini-title {
-  color: #9f63ff;
+  color: #ff5757;
   transition: color 0.3s ease;
 }
 
@@ -115,7 +115,7 @@
 }
 
 #mini-toggle:hover {
-  color: #8859a8;
+  color: #991717e8;
 }
 
 /* Profile Center */
