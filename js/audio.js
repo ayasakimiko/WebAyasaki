@@ -46,12 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
         seekBar.style.setProperty('--seek-progress', `${progress}%`);
     };
 
+    const updateSeekUI = () => {
+        if (!audio || !seekBar) return;
+        seekBar.value = audio.currentTime;
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        updateSeekBarProgress();
+    };
+
     const syncSeekBar = () => {
-        if (audio && seekBar && !isNaN(audio.duration)) {
-            currentTimeEl.textContent = formatTime(audio.currentTime);
-            seekBar.value = audio.currentTime;
-            updateSeekBarProgress();
-        }
+        updateSeekUI();
         requestAnimationFrame(syncSeekBar);
     };
 
@@ -61,27 +64,28 @@ document.addEventListener("DOMContentLoaded", () => {
         miniTitle.textContent = extractFilename(audioSrc) || "Unknown Track";
         audio.volume = audio.volume ?? 0.5;
         if (topVolumeRange) {
-            topVolumeRange.value = Math.round(audio.volume * 100);
+            topVolumeRange.value = Math.round(audio.volume * 50);
             lastVolume = audio.volume;
         }
         updateVolumeIcon();
         updatePlayPauseIcon();
+        updateSeekBarProgress();
     }
 
     // ───── EVENTS: AUDIO ─────
     if (audio) {
         audio.addEventListener("loadedmetadata", () => {
-            seekBar && (seekBar.max = audio.duration);
-            durationEl && (durationEl.textContent = formatTime(audio.duration));
-            currentTimeEl && (currentTimeEl.textContent = "0:00");
-            seekBar && (seekBar.value = 0);
+            if (seekBar) {
+                seekBar.max = audio.duration;
+                seekBar.value = 0;
+            }
+            if (durationEl) durationEl.textContent = formatTime(audio.duration);
+            if (currentTimeEl) currentTimeEl.textContent = "0:00";
             updateSeekBarProgress();
         });
 
         audio.addEventListener("timeupdate", () => {
-            currentTimeEl && (currentTimeEl.textContent = formatTime(audio.currentTime));
-            seekBar && (seekBar.value = audio.currentTime);
-            updateSeekBarProgress();
+            updateSeekUI();
             if (audio.currentTime >= audio.duration && !audio.loop) {
                 seekBar && (seekBar.value = seekBar.max);
                 durationEl && (durationEl.textContent = formatTime(audio.duration));
@@ -97,9 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
     seekBar?.addEventListener("input", () => {
         if (audio) {
             audio.currentTime = seekBar.value;
-            updateSeekBarProgress();
+            updateSeekUI();
         }
     });
+
+    seekBar?.addEventListener("change", updateSeekUI);
 
     playBtn?.addEventListener("click", () => {
         if (audio) {
@@ -133,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     topVolumeRange?.addEventListener("input", handleVolumeChange);
     topVolumeRange?.addEventListener("touchmove", handleVolumeChange);
+    topVolumeRange?.addEventListener("touchend", handleVolumeChange);
 
     syncSeekBar();
 });
