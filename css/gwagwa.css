@@ -6,18 +6,19 @@ body {
   color: #fff;
   font-family: 'Open Sans', sans-serif;
   margin: 0;
-  min-height: 90vh;              
+  min-height: 90vh;
   display: flex;
-  flex-direction: column;         
+  flex-direction: column;
   align-items: center;
-  justify-content: center;    
-  padding-top: 1rem;         
+  justify-content: center;
+  padding-top: 1rem;
   box-sizing: border-box;
   overflow: auto;
+  padding-bottom: 100px; 
 }
 
 .overlay {
-  background: url('https://64.media.tumblr.com/735e7bdcd9214cc28de0f6c8d7b4bb0d/b4fb19b2ad191f21-dd/s640x960/88817f8b66f6a69fb489d257c689982231007a38.gif') no-repeat center center fixed;
+  background: url('https://media1.tenor.com/m/8plFEQbskZEAAAAd/rin-tohsaka-fate-stay-night.gif') no-repeat center center fixed;
   background-size: cover;
   position: fixed;
   top: 0;
@@ -56,18 +57,18 @@ body {
 }
 
 .volume {
-  position: fixed; 
-  top: 10px;      
-  left: 10px;      
+  position: fixed;
+  top: 10px;
+  left: 10px;
   display: flex;
   align-items: center;
   gap: 1px;
-  margin: 0;       
+  margin: 0;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 6px 11px;
   border-radius: 10px;
   opacity: 0.8;
-  z-index: 1000;   
+  z-index: 1000;
 }
 
 .volume-button {
@@ -140,25 +141,25 @@ body {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 3px solid #4a216b;
+  border: 3px solid #cc000081;
   margin-bottom: 10px;
   object-fit: cover;
-  transition: transform 0.4s ease, box-shadow 0.4s ease; 
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   will-change: transform;
   box-shadow:
-    0 0 5px rgba(242, 191, 255, 0.8), 
-    0 0 12px rgb(212, 148, 255), 
-    0 0 22px rgba(138, 43, 226, 0.5),     
-    0 0 35px rgba(148, 0, 211, 0.4);      
+    0 0 5px rgba(255, 105, 105, 0.8),
+    0 0 12px rgb(197, 30, 30),
+    0 0 22px rgb(136, 0, 0),
+    0 0 35px rgba(128, 0, 0, 0.644);
 }
 
 .avatar:hover {
   transform: scale(1.05) translateY(-5px);
   box-shadow:
-    0 0 10px rgb(227, 183, 252), 
-    0 0 18px rgba(213, 168, 255, 0.8),
-    0 0 35px rgba(138, 43, 226, 0.6),
-    0 0 55px rgba(148, 0, 211, 0.5);
+    0 0 10px rgb(255, 41, 41),
+    0 0 18px rgba(255, 47, 47, 0.8),
+    0 0 35px rgba(226, 43, 43, 0.6),
+    0 0 55px rgba(211, 0, 0, 0.5);
 }
 
 
@@ -173,14 +174,14 @@ body {
 }
 
 .username.glow {
-  color: #fdfdfd;
+  color: #f04545ef;
   font-size: 35px;
   font-weight: bold;
   text-shadow:
-    0 0 5px #f8f3f6,
-    0 0 10px #f5f0f3,
-    0 0 20px #bceaff,
-    0 0 40px #a6effc;
+    0 0 5px #991818de,
+    0 0 10px #ff3030,
+    0 0 20px #e42424d3,
+    0 0 40px #b81b1bd3;
 }
 
 .role.glow {
@@ -201,122 +202,122 @@ body {
 
 .username.glow:hover{
   transform: translateY(-3px) scale(1.05);
-  color: #ffffff;
+  color: #fa2a2ac4;
 }
 
 .role.glow:hover,
 .lang:hover {
   transform: translateY(-3px) scale(1.05);
-  color: #af7dd8;
+  color: #b60606cb;
 }
 
 /* Discord Profile */
 .discord-profile {
   display: flex;
   align-items: center;
-  background-color: rgba(52, 1, 94, 0.397);
+  background-color: rgba(94, 1, 1, 0.397);
   border-radius: 20px;
   padding: 20px;
   margin: 20px auto 0;
   width: 90%;
-  max-width: 500px;
+  /* max-width: 500px; ถูกนำออกเพื่อให้ scale ได้เต็มที่ */
   box-sizing: border-box;
   box-shadow:
-    0 0 20px rgba(143, 0, 255, 0.7),   
-    0 0 30px rgba(255, 255, 255, 0.6),       
-    0 6px 12px rgba(188, 72, 255, 0.3);   
-  gap: 16px; 
+    0 0 20px rgb(167, 0, 0),
+    0 0 30px rgba(173, 44, 44, 0.6),
+    0 6px 12px rgba(255, 72, 72, 0.3);
+  gap: 16px;
   backdrop-filter: blur(6px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   word-break: break-word;
 }
 
 .discord-profile:hover {
   transform: scale(1.03);
   box-shadow:
-    0 0 25px rgba(144, 0, 255, 0.596),
-    0 0 35px rgba(158, 84, 255, 0.6),
-    0 6px 12px rgba(255, 255, 255, 0.3);
+    0 0 25px rgba(255, 0, 0, 0.596),
+    0 0 35px rgba(255, 84, 84, 0.6),
+    0 6px 12px rgba(255, 0, 0, 0.836);
 }
 
 .avatar-main {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  border: 3px solid #43b581; 
+  border: 3px solid #43b581;
   object-fit: cover;
   box-shadow:
-   0 0 5px rgba(67, 181, 129, 0.7), 
+   0 0 5px rgba(67, 181, 129, 0.7),
    0 0 10px rgba(67, 181, 129, 0.5);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 /* สีขอบ Avatar ตามสถานะ */
 .avatar-main.online {
-  border-color: #43b581; 
+  border-color: #43b581;
   box-shadow:
    0 0 5px rgba(67, 181, 129, 0.7),
    0 0 20px rgba(67, 181, 129, 0.5);
 }
 .avatar-main.idle {
-  border-color: #faa61a; 
+  border-color: #faa61a;
   box-shadow:
     0 0 5px rgba(250, 166, 26, 0.7),
     0 0 15px rgba(250, 166, 26, 0.5);
 }
 .avatar-main.dnd {
-  border-color: #f04747; 
+  border-color: #f04747;
   box-shadow:
     0 0 5px rgba(240, 71, 71, 0.7),
     0 0 15px rgba(240, 71, 71, 0.5);
 }
 .avatar-main.offline {
-  border-color: #747f8d; 
+  border-color: #747f8d;
   box-shadow:
     0 0 5px rgba(116, 127, 141, 0.7),
     0 0 15px rgba(116, 127, 141, 0.5);
 }
 
 .avatar-main:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 .avatar-main:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 .discord-info {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start; 
-  gap: 8px; 
+  align-items: flex-start;
+  gap: 8px;
   margin-left: 5px;
   font-size: 1rem;
   font-weight: 600;
   color: #fafafa;
-  flex: 1; 
-  min-width: 0; 
+  flex: 1;
+  min-width: 0;
 }
 
-.discord-name-status { 
-  display: flex; 
+.discord-name-status {
+  display: flex;
   align-items: center;
-  gap: 5px; 
-  font-size: 1.3rem; 
+  gap: 5px;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #ffffff;
-  line-height: 1; 
+  line-height: 1;
 }
 
-.status-dot { 
+.status-dot {
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   vertical-align: middle;
-  background-color: #747f8d; 
+  background-color: #747f8d;
 }
 
 .status-dot.online { background-color: #43b581; }
@@ -326,13 +327,13 @@ body {
 
 #discord-activity-status {
   font-size: 1rem;
-  color: #ccc; 
+  color: #ccc;
 }
 
 #discord-status,
 #discord-activity-details,
-#mini-activity { 
-  display: none !important; /
+#mini-activity {
+  display: none !important;
 }
 
 /* Social icons */
@@ -363,7 +364,7 @@ body {
 
 .social-icons a:hover {
   transform: scale(1.4);
-  color: #b080cf;
+  color: #9e1212;
 }
 
 /* Loading screen */
@@ -395,7 +396,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://64.media.tumblr.com/735e7bdcd9214cc28de0f6c8d7b4bb0d/b4fb19b2ad191f21-dd/s640x960/88817f8b66f6a69fb489d257c689982231007a38.gif') center/cover no-repeat;
+  background: url('https://media1.tenor.com/m/8plFEQbskZEAAAAd/rin-tohsaka-fate-stay-night.gif') center/cover no-repeat;
   filter: blur(5px);
   z-index: 1;
 }
@@ -517,9 +518,9 @@ body {
     border-radius: 10px;
     box-sizing: border-box;
     backdrop-filter: blur(5px);
-    position: absolute;
+    position: fixed; 
     left: 1%;
-    bottom: 40px;
+    bottom: 80px;
     z-index: 9999;
     margin: 0;
     transition: all 0.3s ease;
