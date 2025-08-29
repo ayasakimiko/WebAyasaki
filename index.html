@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-  
+
+  <div id="effect-container" aria-hidden="true"></div>
+
   <!-- Loading Screen -->
   <div id="loading-screen">
     <div class="bg-blur"></div>
@@ -36,7 +38,7 @@
         value="50" 
       />
       <audio id="bg-music" loop preload="auto">
-        <source src="https://raw.githubusercontent.com/ayasakimiko/my-music/main/0%20(zero)%20-%20LMYK.mp3" />
+        <source src="https://raw.githubusercontent.com/ayasakimiko/my-music/main/Silent%20Witch%20OST%20EP4.mp3" />
       </audio>
     </div>
   </div>  
@@ -44,13 +46,13 @@
   <!-- Profile Center -->
   <div class="profile-center" style="opacity:0;">
     <img 
-      src="https://i.pinimg.com/originals/61/6a/f9/616af948ce72bf1d074d841c895f340d.gif" 
+      src="https://64.media.tumblr.com/e69a6b88c0eb89471b7986aafe49b95d/166d0518d252498c-a3/s540x810/ca508b6330787ccb8507aa54bd2bfb19d7b0f61a.gifv" 
       class="avatar" 
       alt="Avatar" 
     />
-    <div class="username glow">AyasakiMiko💖</div>
+    <div class="username glow">AyasakiMiko🩵</div>
     <div class="role glow">Gamer🎮/Edit🎥/Coding💻</div>
-    <div class="lang">💖Nice to meet you💖</div>
+    <div class="lang">Nice to meet you 🩵</div>
 
     <!-- Discord Info Box -->
     <div class="discord-profile">
@@ -86,10 +88,12 @@
       </a>
     </div>
 
+    <div style="height: 10px;"></div>
+
     <!-- Mini Song Player -->
     <div class="mini-player" id="mini-player">
       <img 
-        src="https://media1.tenor.com/m/NzxaQFF-qQUAAAAC/rin-tohsaka.gif" 
+        src="https://media1.tenor.com/m/W1TaAXfVvSwAAAAd/silent-witch-stair-slide.gif" 
         class="mini-cover" 
         alt="Cover" 
       />
@@ -106,7 +110,7 @@
     </div>
   </div>
 
-  <div style="height: 60px;"></div>
+  <div style="height: 100px;"></div>
 
   <!-- Scripts -->
   <script src="js/ooo.js"></script>
@@ -140,29 +144,28 @@
 
   loadingScreen?.addEventListener('click', handleStart);
 });
-  </script>
+</script>
 
-  <!-- Screen lock scale -->
-  <script>
-    function scaleToFit() {
-      const scaleX = window.innerWidth / 1920;
-      const scaleY = window.innerHeight / 1080;
-      const scale = Math.min(scaleX, scaleY);
+<!-- Screen lock scale -->
+<script>
+  function scaleToFit() {
+    const scaleX = window.innerWidth / 1920;
+    const scaleY = window.innerHeight / 1080;
+    const scale = Math.min(scaleX, scaleY);
 
-      const screen = document.querySelector('.screen-locked');
-      if (screen) {
-        screen.style.transform = `scale(${scale})`;
-      }
+    const screen = document.querySelector('.screen-locked');
+    if (screen) {
+      screen.style.transform = `scale(${scale})`;
     }
+  }
 
-    window.addEventListener('resize', scaleToFit);
-    window.addEventListener('load', scaleToFit);
-  </script>
-  
-<div id="snow-container"></div>
+  window.addEventListener('resize', scaleToFit);
+  window.addEventListener('load', scaleToFit);
+</script>
 
 </body>
 </html>
+
 
 
 
