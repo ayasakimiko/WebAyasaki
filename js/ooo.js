@@ -1,8 +1,6 @@
 const userId = "626071745576828955";
 
-/*-----------------------------
-| Unique Visit Counter
-------------------------------*/
+// Unique Visit Counter
 document.addEventListener("DOMContentLoaded", () => {
     const visitKey = "hasVisited";
     const viewEl = document.getElementById("views-count");
@@ -19,9 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-/*-----------------------------
-| Discord Presence via Lanyard
-------------------------------*/
+// Discord Presence via Lanyard
 const statusEmojiMap = {
     online: "🟢",
     idle: "🌙",
@@ -38,22 +34,8 @@ const statusTextMap = {
 
 const ws = new WebSocket("wss://api.lanyard.rest/socket");
 
-ws.addEventListener("open", () => {
-    ws.send(JSON.stringify({
-        op: 2,
-        d: { subscribe_to_id: userId }
-    }));
-});
-
-ws.addEventListener("message", (event) => {
-    let data;
-    try {
-        data = JSON.parse(event.data);
-    } catch (err) {
-        console.error("WebSocket JSON error:", err);
-        return;
-    }
-
+ws.addEventListener("open", () => { ws.send(JSON.stringify({op: 2,d: { subscribe_to_id: userId }}));});
+ws.addEventListener("message", (event) => {let data;try {data = JSON.parse(event.data);} catch (err) {console.error("WebSocket JSON error:", err); return;}
     const { t, d } = data;
     if (!d || (t !== "INIT_STATE" && t !== "PRESENCE_UPDATE")) return;
 
@@ -74,7 +56,7 @@ ws.addEventListener("message", (event) => {
 
     let fullActivityDisplay = ""; 
 
-    // --- Logic ---
+    // Logic
     if (game) {
         let serverTag = "";
         if (game.session_id) {
@@ -92,6 +74,7 @@ ws.addEventListener("message", (event) => {
         } else {
             fullActivityDisplay = `🎮 กำลังเล่น ${game.name}${serverTag}`;
         }
+
     } else if (customStatus && customStatus.state) {
         fullActivityDisplay = `${statusEmojiMap[status] || ""} ${customStatus.state}`;
     } else if (spotify) {
@@ -129,9 +112,7 @@ ws.addEventListener("message", (event) => {
     if (miniActivityEl) miniActivityEl.style.display = 'none';
 });
 
-/*-----------------------------
-| Mouse Rotate Effect
-------------------------------*/
+// Mouse Rotate Effect
 const profile = document.querySelector('.profile-center');
 const maxAngle = 20;
 const deadZoneSizeX = window.innerWidth / 6;
@@ -159,9 +140,7 @@ window.addEventListener('mousemove', (e) => {
     }, 1000);
 });
 
-/*-----------------------------
-| Responsive Profile Transform
-------------------------------*/
+// Responsive Profile Transform
 function adjustProfileTransform() {
     if (!profile) return;
 
@@ -176,18 +155,13 @@ function adjustProfileTransform() {
 adjustProfileTransform();
 window.addEventListener('resize', adjustProfileTransform);
 
-/*-----------------------------
-| Zoom Mini Player
-------------------------------*/
+// Zoom Mini Player
 const miniPlayer = document.querySelector('.mini-player');
 function toggleZoom() {
     miniPlayer.classList.toggle('zoomed');
 }
 
-/*-----------------------------
-| Lock F12
-------------------------------*/
-
+// Lock F12
 document.addEventListener('keydown', function(e) {
   if (
     e.key === 'F12' || 
@@ -197,10 +171,7 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-/*-----------------------------
-| Mouse Rotate Effect Intro
-------------------------------*/
-
+// Mouse Rotate Effect Intro
 const enterText = document.getElementById('enter-text');
 const maxTilt = 15; 
 const shakeAmount = 1.5; 
@@ -224,6 +195,7 @@ window.addEventListener('mousemove', (e) => {
 window.addEventListener('mouseleave', () => {
   enterText.style.transform = 'rotateX(0deg) rotateY(0deg)';
 });
+
 
 
 
