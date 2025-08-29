@@ -6,7 +6,7 @@ body {
   color: #fff;
   font-family: 'Open Sans', sans-serif;
   margin: 0;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,11 +14,11 @@ body {
   padding-top: 1rem;
   box-sizing: border-box;
   overflow: auto;
-  padding-bottom: 100px; 
+  padding-bottom: 100px;
 }
 
 .overlay {
-  background: url('https://media1.tenor.com/m/8plFEQbskZEAAAAd/rin-tohsaka-fate-stay-night.gif') no-repeat center center fixed;
+  background: url('https://64.media.tumblr.com/6fd568742b9d3fa37ba35495d630bab9/166d0518d252498c-40/s1280x1920/694a976d9cb8dafbf011924ae1641578d5fa4b03.gifv') no-repeat center center fixed;
   background-size: cover;
   position: fixed;
   top: 0;
@@ -26,36 +26,11 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0;
-  filter: blur(5px);
-  opacity: 0.6;
-}
-
-.snowflake {
-  position: fixed;
-  top: -10px;
-  color: #ffffff;
-  font-size: 1em;
-  pointer-events: none;
-  z-index: 1000;
-  animation: fall linear infinite;
-  user-select: none;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(100vh);
-  }
+  filter: blur(7px);
+  opacity: 0.8;
 }
 
 /* Volume Control */
-.top-controls {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  z-index: 2;
-  display: none;
-}
-
 .volume {
   position: fixed;
   top: 10px;
@@ -83,7 +58,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.85);
-  color: rgb(255, 255, 255);
+  color: #fff;
   padding: 6px 10px;
   border-radius: 5px;
   font-size: 13px;
@@ -116,55 +91,53 @@ body {
   position: absolute;
   top: 50%;
   left: 0%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.9);
   padding: 1rem;
   text-align: center;
   z-index: 2;
   opacity: 0;
   pointer-events: none;
   margin-top: 0;
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  transition: opacity 1s ease, transform 1s ease;
   perspective: 1000px;
   transform-style: preserve-3d;
   padding-bottom: 1.7rem;
-  will-change: transform;
+  will-change: transform, opacity;
   transform-origin: center center;
 }
 
 .profile-center.visible {
   opacity: 1;
   pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
 }
+
 
 /* Avatar */
 .avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid #cc000081;
+  width: 200px;
+  height: 200px;
   margin-bottom: 10px;
   object-fit: cover;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   will-change: transform;
   box-shadow:
-    0 0 5px rgba(255, 105, 105, 0.8),
-    0 0 12px rgb(197, 30, 30),
-    0 0 22px rgb(136, 0, 0),
-    0 0 35px rgba(128, 0, 0, 0.644);
+    0 0 5px rgb(166, 214, 253),
+    0 0 12px rgb(121, 205, 253),
+    0 0 22px rgba(101, 185, 253, 0.945),
+    0 0 35px rgba(0, 165, 241, 0.945);
 }
 
 .avatar:hover {
   transform: scale(1.05) translateY(-5px);
   box-shadow:
-    0 0 10px rgb(255, 41, 41),
-    0 0 18px rgba(255, 47, 47, 0.8),
-    0 0 35px rgba(226, 43, 43, 0.6),
-    0 0 55px rgba(211, 0, 0, 0.5);
+    0 0 10px rgb(117, 200, 255),
+    0 0 18px rgba(81, 194, 247, 0.877),
+    0 0 35px rgba(45, 166, 247, 0.856),
+    0 0 55px rgba(0, 109, 211, 0.692);
 }
 
-
-
-/* Username and role with glow */
+/* Username / Role / Lang */
 .username.glow, .role.glow, .lang {
   letter-spacing: 1px;
   line-height: 1.2;
@@ -174,14 +147,14 @@ body {
 }
 
 .username.glow {
-  color: #f04545ef;
+  color: hsla(207, 100%, 88%, 0.992);
   font-size: 35px;
   font-weight: bold;
   text-shadow:
-    0 0 5px #991818de,
-    0 0 10px #ff3030,
-    0 0 20px #e42424d3,
-    0 0 40px #b81b1bd3;
+    0 0 5px #a2e9ff,
+    0 0 10px #7fd0ff,
+    0 0 20px #74aff3ec,
+    0 0 40px #2ea9f0f8;
 }
 
 .role.glow {
@@ -200,46 +173,50 @@ body {
   color: #c7c7c7d7;
 }
 
-.username.glow:hover{
+.username.glow:hover {
   transform: translateY(-3px) scale(1.05);
-  color: #fa2a2ac4;
+  color: #93d7fff8;
+  text-shadow:
+    0 0 10px #9ec8ff,
+    0 0 15px #68c8ff,
+    0 0 23px #5fb7ff,
+    0 0 40px #4497db;
 }
 
 .role.glow:hover,
 .lang:hover {
   transform: translateY(-3px) scale(1.05);
-  color: #b60606cb;
+  color: #56befaf1;
 }
 
-/* Discord Profile */
+/* Discord Profile Card */
 .discord-profile {
   display: flex;
   align-items: center;
-  background-color: rgba(94, 1, 1, 0.397);
+  background: rgba(0, 66, 92, 0.4);
   border-radius: 20px;
   padding: 20px;
   margin: 20px auto 0;
   width: 90%;
-  /* max-width: 500px; ถูกนำออกเพื่อให้ scale ได้เต็มที่ */
   box-sizing: border-box;
-  box-shadow:
-    0 0 20px rgb(167, 0, 0),
-    0 0 30px rgba(173, 44, 44, 0.6),
-    0 6px 12px rgba(255, 72, 72, 0.3);
-  gap: 16px;
-  backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 12px;
+  backdrop-filter: blur(3px);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
   cursor: pointer;
   flex-wrap: wrap;
   word-break: break-word;
+  box-shadow:
+    0 0 10px rgba(142, 212, 253, 0.932),
+    0 0 20px rgba(121, 197, 248, 0.87),
+    0 6px 12px rgba(97, 184, 255, 0.87);
 }
 
 .discord-profile:hover {
   transform: scale(1.03);
   box-shadow:
-    0 0 25px rgba(255, 0, 0, 0.596),
-    0 0 35px rgba(255, 84, 84, 0.6),
-    0 6px 12px rgba(255, 0, 0, 0.836);
+    0 0 25px rgba(104, 187, 255, 0.932),
+    0 0 35px rgba(115, 187, 255, 0.877),
+    0 6px 12px rgba(68, 177, 250, 0.836);
 }
 
 .avatar-main {
@@ -249,16 +226,16 @@ body {
   border: 3px solid #43b581;
   object-fit: cover;
   box-shadow:
-   0 0 5px rgba(67, 181, 129, 0.7),
-   0 0 10px rgba(67, 181, 129, 0.5);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    0 0 5px rgba(67, 181, 129, 0.7),
+    0 0 10px rgba(67, 181, 129, 0.5);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
-/* สีขอบ Avatar ตามสถานะ */
+
 .avatar-main.online {
   border-color: #43b581;
   box-shadow:
-   0 0 5px rgba(67, 181, 129, 0.7),
-   0 0 20px rgba(67, 181, 129, 0.5);
+    0 0 5px rgba(67, 181, 129, 0.7),
+    0 0 20px rgba(67, 181, 129, 0.5);
 }
 .avatar-main.idle {
   border-color: #faa61a;
@@ -280,11 +257,7 @@ body {
 }
 
 .avatar-main:hover {
-  transform: scale(1.05);
-}
-
-.avatar-main:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .discord-info {
@@ -330,6 +303,7 @@ body {
   color: #ccc;
 }
 
+/* Hide activity text blocks (kept once) */
 #discord-status,
 #discord-activity-details,
 #mini-activity {
@@ -339,15 +313,15 @@ body {
 /* Social icons */
 .social-icons {
   position: relative;
-  left: 2.5%;
-  z-index: 80;
+  left: 1%;
+  z-index: 15;
   pointer-events: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 25px;
-  padding: 1px 1px 1px 1px;
-  margin-top: 15px;
+  gap: 28px;
+  padding: 1px;
+  margin-top: 20px;
 }
 
 .social-icons a {
@@ -357,14 +331,14 @@ body {
   cursor: pointer;
   display: inline-block;
   position: relative;
-  z-index: 1000;
+  z-index: 12;
   pointer-events: auto;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform 0.4s ease, color 0.4s ease;
 }
 
 .social-icons a:hover {
-  transform: scale(1.4);
-  color: #9e1212;
+  transform: scale(1.3);
+  color: #82d0fd;
 }
 
 /* Loading screen */
@@ -396,9 +370,10 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://media1.tenor.com/m/8plFEQbskZEAAAAd/rin-tohsaka-fate-stay-night.gif') center/cover no-repeat;
-  filter: blur(5px);
-  z-index: 1;
+  background: url('https://64.media.tumblr.com/6fd568742b9d3fa37ba35495d630bab9/166d0518d252498c-40/s1280x1920/694a976d9cb8dafbf011924ae1641578d5fa4b03.gifv') center/cover no-repeat;
+  filter: blur(12px);
+  z-index: 0;
+  opacity: 0.5;
 }
 
 #enter-text {
@@ -409,33 +384,60 @@ body {
   font-weight: bold;
   padding: 20px 50px;
   border-radius: 20px;
-  color: #fff;
+  color: #9cc0ee;
   text-align: center;
-  text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
-  animation: glow 2.5s ease-in-out infinite alternate;
+  text-shadow: 0 0 30px #40c3ff, 0 0 50px #2496f3b7;
+  animation: glow 3s ease-in-out infinite alternate;
   user-select: none;
   cursor: pointer;
 }
 
-.bg-blur {
-  position: absolute;
-  top: 0;
+#effect-container {
+  position: fixed;
+  top: 0; 
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url('https://media1.tenor.com/m/09GiOES0rkoAAAAC/oz-oz-yarimasu.gif') no-repeat center center;
-  background-size: cover;
-  filter: blur(15px);
-  z-index: 11;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
 }
 
-@keyframes glow {
-  from {
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
-  }
-  to {
-    text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff;
-  }
+.effect-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,200,1) 0%,
+    rgba(255,255,200,0.6) 60%,
+    rgba(255,255,200,0) 70%
+  );
+  box-shadow:
+    0 0 8px 2px rgba(255, 255, 200, 0.85),
+    0 0 16px 6px rgba(255, 240, 160, 0.55);
+  will-change: transform, opacity, filter; 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #effect-container { display: none; }
+}
+
+/* Top controls  */
+.top-controls {
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  pointer-events: none;
+}
+.top-controls.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Responsive */
@@ -506,24 +508,26 @@ body {
     align-items: center;
   }
 
+  /* MINI PLAYER */
   .mini-player {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 0.6rem;
-    max-width: 280px;
+    max-width: auto;
     width: 100%;
-    padding: 0.5rem 0.7rem;
+    padding: 0.7rem 0.7rem 1rem;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     box-sizing: border-box;
     backdrop-filter: blur(5px);
-    position: fixed; 
+    position: fixed;
     left: 1%;
-    bottom: 80px;
+    bottom: 100px;
     z-index: 9999;
     margin: 0;
     transition: all 0.3s ease;
+    overflow: visible;
   }
 
   .mini-player img {
@@ -552,38 +556,62 @@ body {
     height: 20px;
   }
 
-  .mini-player input[type="range"]::-webkit-slider-runnable-track {
+  /* Seek Bar */
+  #mini-seek {
+    width: 100%;
     height: 8px;
-    background: transparent;
     border-radius: 4px;
+    appearance: none;
     position: relative;
-  }
-
-  .mini-player input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    background: white;
-    border-radius: 50%;
-    position: relative;
-    top: -2px;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    margin-bottom: 6px;
+    background: linear-gradient(
+      to right,
+      #fff var(--seek-progress, 0%),
+      #444 var(--seek-progress, 0%)
+    );
   }
 
-  .mini-player input[type="range"]::-moz-range-track {
+  /* WebKit track/thumb */
+  #mini-seek::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 4px;
     background: transparent;
-    height: 4px;
-    border-radius: 2px;
+  }
+  #mini-seek::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    margin-top: -2px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
   }
 
-  .mini-player input[type="range"]::-moz-range-thumb {
-    background: white;
+  /* Firefox */
+  #mini-seek::-moz-range-track {
+    height: 8px;
+    border-radius: 4px;
+    background: #444;
+  }
+  #mini-seek::-moz-range-progress {
+    height: 8px;
+    border-radius: 4px;
+    background: #fff;
+  }
+  #mini-seek::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
     border: none;
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    background: #fff;
     cursor: pointer;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
   }
 
   .social-icons {
@@ -594,7 +622,8 @@ body {
     padding-right: 0px;
     align-items: center;
     gap: 25px;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
     width: 100%;
     pointer-events: auto;
   }
@@ -607,39 +636,6 @@ body {
   }
 }
 
-.profile-center {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease;
-}
-
-.profile-center.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.top-controls {
-  display: flex;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
-  pointer-events: none;
-}
-
-.top-controls.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-#discord-status,
-#discord-activity-details,
-#mini-activity {
-  display: none !important;
-}
-
 
 
 
@@ -648,6 +644,7 @@ body {
 
   
   
+
 
 
 
