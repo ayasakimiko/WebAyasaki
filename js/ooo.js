@@ -66,13 +66,13 @@ ws.addEventListener("message", (event) => {let data;try {data = JSON.parse(event
         }
 
         if (game.details && game.state) {
-            fullActivityDisplay = `🎮 กำลังเล่น ${game.name}: ${game.details} (${game.state})${serverTag}`;
+            fullActivityDisplay = `🎮 กำลังเล่น ${game.name}: ${game.details} (${game.state})`;
         } else if (game.details) {
-            fullActivityDisplay = `🎮 กำลังเล่น ${game.name}: ${game.details}${serverTag}`;
+            fullActivityDisplay = `🎮 กำลังเล่น ${game.name}: ${game.details}`;
         } else if (game.state) {
-            fullActivityDisplay = `🎮 กำลังเล่น ${game.name}: ${game.state}${serverTag}`;
+            fullActivityDisplay = `🎮 กำลังเล่น ${game.name}: ${game.state}`;
         } else {
-            fullActivityDisplay = `🎮 กำลังเล่น ${game.name}${serverTag}`;
+            fullActivityDisplay = `🎮 กำลังเล่น ${game.name}`;
         }
 
     } else if (customStatus && customStatus.state) {
@@ -195,6 +195,7 @@ window.addEventListener('mousemove', (e) => {
 window.addEventListener('mouseleave', () => {
   enterText.style.transform = 'rotateX(0deg) rotateY(0deg)';
 });
+
 
 
 
