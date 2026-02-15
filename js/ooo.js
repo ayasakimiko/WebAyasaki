@@ -58,13 +58,6 @@ ws.addEventListener("message", (event) => {let data;try {data = JSON.parse(event
 
     // Logic
     if (game) {
-        let serverTag = "";
-        if (game.session_id) {
-            serverTag = ` [Server: ${game.session_id}]`;
-        } else if (game.party && game.party.id) {
-            serverTag = ` [Server: ${game.party.id}]`;
-        }
-
         if (game.details && game.state) {
             fullActivityDisplay = `🎮 กำลังเล่น ${game.name}: ${game.details} (${game.state})`;
         } else if (game.details) {
@@ -195,6 +188,7 @@ window.addEventListener('mousemove', (e) => {
 window.addEventListener('mouseleave', () => {
   enterText.style.transform = 'rotateX(0deg) rotateY(0deg)';
 });
+
 
 
 
